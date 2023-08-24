@@ -1,0 +1,40 @@
+apiVersion: v1
+items:
+- apiVersion: networking.istio.io/v1beta1
+  kind: Gateway
+  metadata:
+    creationTimestamp: "2023-08-23T22:39:12Z"
+    generation: 2
+    name: camunda-keycloak-ingress
+    namespace: default
+    resourceVersion: "4694107"
+    uid: 6d66a4e6-6b27-4b67-a36d-2362c819417e
+  spec:
+    selector:
+      istio: ingressgateway
+    servers:
+    - hosts:
+      - keycloak.dev.jlscode.com
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+      tls:
+        httpsRedirect: true
+    - hosts:
+      - keycloak.dev.jlscode.com
+      - operate.dev.jlscode.com
+      - optimize.dev.jlscode.com
+      - identity.dev.jlscode.com
+      - tasklist.dev.jlscode.com
+      - modeler.dev.jlscode.com
+      port:
+        name: https-443
+        number: 443
+        protocol: HTTPS
+      tls:
+        credentialName: jlscode-dev
+        mode: SIMPLE
+kind: List
+metadata:
+  resourceVersion: ""

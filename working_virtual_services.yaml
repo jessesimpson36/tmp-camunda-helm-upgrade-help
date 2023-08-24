@@ -1,0 +1,119 @@
+apiVersion: v1
+items:
+- apiVersion: networking.istio.io/v1beta1
+  kind: VirtualService
+  metadata:
+    creationTimestamp: "2023-08-23T22:39:12Z"
+    generation: 2
+    name: camunda-identity-vs
+    namespace: default
+    resourceVersion: "4694141"
+    uid: 5362e35c-4639-4f0d-b5f6-6c627741e8f8
+  spec:
+    gateways:
+    - camunda-keycloak-ingress
+    hosts:
+    - identity.dev.jlscode.com
+    http:
+    - match:
+      - port: 443
+      route:
+      - destination:
+          host: cpt-identity
+          port:
+            number: 80
+- apiVersion: networking.istio.io/v1beta1
+  kind: VirtualService
+  metadata:
+    creationTimestamp: "2023-08-23T22:39:12Z"
+    generation: 1
+    name: camunda-keycloak-vs
+    namespace: default
+    resourceVersion: "4692161"
+    uid: b377188d-75c3-4c6d-ba67-da20247555f6
+  spec:
+    gateways:
+    - camunda-keycloak-ingress
+    hosts:
+    - keycloak.dev.jlscode.com
+    http:
+    - match:
+      - port: 443
+      route:
+      - destination:
+          host: cpt-keycloak
+          port:
+            number: 80
+        headers:
+          request:
+            set:
+              x-forwarded-proto: https
+- apiVersion: networking.istio.io/v1beta1
+  kind: VirtualService
+  metadata:
+    creationTimestamp: "2023-08-23T22:39:12Z"
+    generation: 2
+    name: camunda-operate-vs
+    namespace: default
+    resourceVersion: "4694163"
+    uid: 13526483-a75d-4712-b831-45d162970568
+  spec:
+    gateways:
+    - camunda-keycloak-ingress
+    hosts:
+    - operate.dev.jlscode.com
+    http:
+    - match:
+      - port: 443
+      route:
+      - destination:
+          host: cpt-operate
+          port:
+            number: 80
+- apiVersion: networking.istio.io/v1beta1
+  kind: VirtualService
+  metadata:
+    creationTimestamp: "2023-08-23T22:39:12Z"
+    generation: 2
+    name: camunda-optimize-vs
+    namespace: default
+    resourceVersion: "4694173"
+    uid: c8a3cb91-ddb6-44a1-b1f6-ed6b0205a107
+  spec:
+    gateways:
+    - camunda-keycloak-ingress
+    hosts:
+    - optimize.dev.jlscode.com
+    http:
+    - match:
+      - port: 443
+      route:
+      - destination:
+          host: cpt-optimize
+          port:
+            number: 80
+- apiVersion: networking.istio.io/v1beta1
+  kind: VirtualService
+  metadata:
+    creationTimestamp: "2023-08-23T22:39:12Z"
+    generation: 2
+    name: camunda-tasklist-vs
+    namespace: default
+    resourceVersion: "4694187"
+    uid: 9f0cb6e5-2aef-4fb4-9f3f-4390eda3412c
+  spec:
+    gateways:
+    - camunda-keycloak-ingress
+    hosts:
+    - tasklist.dev.jlscode.com
+    http:
+    - match:
+      - port: 443
+      route:
+      - destination:
+          host: cpt-tasklist
+          port:
+            number: 80
+kind: List
+metadata:
+  resourceVersion: ""
